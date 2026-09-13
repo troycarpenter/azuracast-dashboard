@@ -74,5 +74,5 @@ The dashboard is intended to consume AzuraCast's public now-playing and station-
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.eld.
+MIT License. See [LICENSE](LICENSE) for details.
 
