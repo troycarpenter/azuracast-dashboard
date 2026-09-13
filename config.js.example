@@ -1,0 +1,9 @@
+const DASHBOARD_CONFIG = {
+    // Set this to the base URL of your AzuraCast installation.
+    // Leave it empty when the dashboard is served from the same
+    // origin as AzuraCast.
+    azuracastUrl: "https://radio.example.com",
+
+    // Text shown in the page title and dashboard header.
+    siteTitle: "AzuraCast Dashboard"
+};

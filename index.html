@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AzuraCast Dashboard</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>AzuraCast Dashboard</h1>
+
+        <div class="view-controls">
+            <button id="compactButton">Compact</button>
+            <button id="fullButton">Full</button>
+        </div>
+    </header>
+
+    <main id="dashboard"></main>
+
+    <audio id="audioPlayer"></audio>
+
+    <!-- Request Song Modal -->
+    <div id="requestModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="request-header">
+                <button id="closeRequestModal">✕</button>
+
+                <h2 id="requestStationName"></h2>
+
+                <input
+                    id="requestSearch"
+                    placeholder="Search songs..."
+                >
+
+                <div class="request-controls">
+                    <label>
+                        Show:
+                        <select id="requestRows">
+                            <option value="10">10</option>
+                            <option value="25" selected>25</option>
+                        </select>
+                    </label>
+
+                    <button id="requestRefresh">Refresh</button>
+                </div>
+            </div>
+
+            <div id="requestList" class="request-list"></div>
+
+            <div class="request-pagination">
+                <button id="requestPrevious">◀</button>
+
+                <span>
+                    Page
+                    <input
+                        id="requestPageJump"
+                        type="number"
+                        min="1"
+                        value="1"
+                    >
+                    <span id="requestPageInfo">of 1</span>
+                </span>
+
+                <button id="requestNext">▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

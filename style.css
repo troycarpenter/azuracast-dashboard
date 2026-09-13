@@ -1,0 +1,602 @@
+body {
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #111827;
+
+    color: #f9fafb;
+
+    margin: 0;
+
+    padding: 2rem;
+
+}
+
+/* Header */
+
+header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 2rem;
+
+}
+
+h1 {
+
+    margin: 0;
+
+    font-size: 2rem;
+
+}
+
+/* View controls */
+
+.view-controls {
+
+    display: flex;
+
+    gap: .5rem;
+
+}
+
+button {
+
+    background: #374151;
+
+    color: white;
+
+    border: none;
+
+    border-radius: .5rem;
+
+    padding: .6rem 1rem;
+
+    cursor: pointer;
+
+    font-size: .95rem;
+
+}
+
+button:hover {
+
+    background: #4b5563;
+
+}
+
+button.active {
+
+    background: #2563eb;
+
+}
+
+/* Dashboard grid */
+
+#dashboard {
+
+    display: grid;
+
+    gap: 1rem;
+
+}
+
+/* Compact layout */
+
+#dashboard.compact {
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+}
+
+/* Full layout */
+
+#dashboard.full {
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(350px, 420px));
+
+    justify-content: center;
+
+}
+
+/* Station card */
+
+.station {
+
+    background: #1f2937;
+
+    border-radius: 1rem;
+
+    padding: 1rem;
+
+    display: flex;
+
+    gap: 1rem;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease,
+        border-color .15s ease;
+
+    border: 1px solid transparent;
+
+}
+
+/* Currently playing */
+
+.station.playing {
+
+    background: #243447;
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 1px rgba(37, 99, 235, .35),
+        0 0 18px rgba(37, 99, 235, .25);
+
+}
+
+.station:hover {
+
+    transform: translateY(-2px);
+
+}
+
+/* Compact card */
+
+.compact .station {
+
+    min-height: 90px;
+
+    align-items: center;
+
+}
+
+.compact .art {
+
+    width: 80px;
+
+    height: 80px;
+
+}
+
+.compact .song {
+
+    font-size: 1rem;
+
+}
+
+/* Full card */
+
+.full .station {
+
+    flex-direction: column;
+
+}
+
+.full .art {
+
+    width:100%;
+
+    aspect-ratio:1 / 1;
+
+    height:auto;
+
+    object-fit:cover;
+
+}
+
+/* Artwork */
+
+.art {
+
+    border-radius: .5rem;
+
+    object-fit: cover;
+
+    background: #374151;
+
+}
+
+/* Info */
+
+.info {
+
+    flex: 1;
+
+}
+
+.station-name {
+
+    font-size: 1.1rem;
+
+    font-weight: 700;
+
+    margin-bottom: .25rem;
+
+}
+
+.live {
+
+    color: #22c55e;
+
+    font-size: .8rem;
+
+    margin-left: .5rem;
+
+}
+
+.offline {
+
+    color: #ef4444;
+
+    font-size: .8rem;
+
+    margin-left: .5rem;
+
+}
+
+.song {
+
+    font-size: 1.15rem;
+
+    font-weight: 600;
+
+}
+
+.artist {
+
+    color: #9ca3af;
+
+}
+
+/* Current time / duration */
+
+.time {
+
+    color: #d1d5db;
+
+    font-size: .85rem;
+
+    margin-top: .5rem;
+
+}
+
+/* Progress */
+
+.progress {
+
+    background: #374151;
+
+    height: 8px;
+
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    margin: .5rem 0;
+
+}
+
+.progress span {
+
+    display: block;
+
+    height: 100%;
+
+    background: #3b82f6;
+
+}
+
+/* Next song */
+
+.next {
+
+    color: #9ca3af;
+
+    font-size: .85rem;
+
+}
+
+/* Listen button */
+
+.listen {
+
+    display: inline-block;
+
+    margin-top: .5rem;
+
+    background: #2563eb;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: .45rem .8rem;
+
+    border-radius: .4rem;
+
+}
+
+.listen:hover {
+
+    background: #1d4ed8;
+
+}
+
+/* History controls */
+
+.history-button {
+
+    margin-top: .5rem;
+
+    background: #374151;
+
+}
+
+.history-button:hover {
+
+    background: #4b5563;
+
+}
+
+/* Expanded history */
+
+.history {
+
+    margin-top: 1rem;
+
+    border-top: 1px solid #374151;
+
+    padding-top: .75rem;
+
+}
+
+.history h3 {
+
+    margin: .25rem 0 .5rem;
+
+    font-size: 1rem;
+
+}
+
+.history-item {
+
+    color: #d1d5db;
+
+    font-size: .9rem;
+
+    padding: .25rem 0;
+
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 1rem;
+
+    }
+
+    header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 1rem;
+
+    }
+
+    #dashboard.compact,
+    #dashboard.full {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* Request modal */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.75);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1000;
+
+}
+
+.modal.hidden {
+
+    display: none;
+
+}
+
+.modal-content {
+
+    background: #1f2937;
+
+    color: #f9fafb;
+
+    width: min(90vw, 600px);
+
+    max-height: 80vh;
+
+    border-radius: 1rem;
+
+    padding: 1.5rem;
+
+    position: relative;
+
+}
+
+.modal-content h2 {
+
+    margin-top: 0;
+
+}
+
+#closeRequestModal {
+
+    position: absolute;
+
+    top: .75rem;
+
+    right: .75rem;
+
+}
+
+#requestSearch {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 1rem;
+
+    padding: .6rem;
+
+    border-radius: .5rem;
+
+    border: none;
+
+}
+
+.request-item button {
+
+    margin-left: auto;
+
+    flex-shrink: 0;
+
+}
+
+.request-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    padding: .75rem 0;
+
+    border-bottom: 1px solid #374151;
+
+}
+
+.request-item span {
+
+    color: #9ca3af;
+
+}
+
+.request-art {
+
+    width: 60px;
+
+    height: 60px;
+
+    object-fit: cover;
+
+    border-radius: .5rem;
+
+}
+
+.toast {
+
+    position: fixed;
+
+    bottom: 2rem;
+
+    right: 2rem;
+
+    background: #222;
+
+    color: white;
+
+    padding: 1rem 1.5rem;
+
+    border-radius: .5rem;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+
+    pointer-events: none;
+
+    z-index: 1000;
+
+}
+
+.toast.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+.requested {
+    opacity: .6;
+    cursor: default;
+}
+
+.modal-content {
+
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+
+}
+
+.request-header {
+
+    flex-shrink: 0;
+
+}
+
+.request-list {
+
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding-right: 8px;
+    box-sizing: border-box;
+    scrollbar-gutter: stable;
+}
+
+.request-pagination {
+
+    flex-shrink: 0;
+
+}

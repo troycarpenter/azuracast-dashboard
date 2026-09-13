@@ -1,0 +1,8 @@
+# Local deployment configuration
+config.js
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
