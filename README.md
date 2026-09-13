@@ -50,6 +50,8 @@ This makes the dashboard use relative API paths such as `/api/nowplaying`.
 
 `config.js` is intentionally ignored by Git. Do not put API keys, passwords, tokens, or other secrets in it.
 
+Favicon / branding — swap /favicon.svg and any station-specific styling/colors in the stylesheet if you want branding distinct from the original.
+
 ## Deployment
 
 Serve the repository directory as a normal static website. Make sure `config.js` exists alongside `index.html`, `app.js`, and `style.css`.
@@ -72,4 +74,5 @@ The dashboard is intended to consume AzuraCast's public now-playing and station-
 
 ## License
 
-License to be selected.
+MIT License. See [LICENSE](LICENSE) for details.eld.
+
