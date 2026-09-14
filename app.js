@@ -143,20 +143,16 @@ async function loadRequests() {
             );
 
         if (pageInfo) {
-
             pageInfo.textContent =
                 `of ${requestTotalPages}`;
-
         }
 
         if (pageJump) {
             pageJump.value =
                 requestPage;
-
         }
     }
     catch(error) {
-
         console.error(
             "Request loading failed:",
             error
@@ -377,13 +373,11 @@ function updateDocumentTitle() {
 
 // Update the Media Session Data for headunits
 function updateMediaMetadata() {
-
     if (
         activeStation !== null &&
         audioPlayer &&
         !audioPlayer.paused
     ) {
-
         const station =
             stations[activeStation];
 
@@ -414,23 +408,17 @@ function updateMediaMetadata() {
                 });
 
             return;
-
         }
-
     }
 
     if ("mediaSession" in navigator) {
-
         navigator.mediaSession.metadata =
             null;
-
     }
-
 }
 
 // More Headunit time adjustments
 function updateMediaPosition() {
-
     if (
         activeStation === null ||
         !audioPlayer ||
@@ -438,9 +426,7 @@ function updateMediaPosition() {
         !("mediaSession" in navigator) ||
         !("setPositionState" in navigator.mediaSession)
     ) {
-
         return;
-
     }
 
     const station =
@@ -468,18 +454,14 @@ function updateMediaPosition() {
         !Number.isFinite(duration) ||
         duration <= 0
     ) {
-
         return;
-
     }
 
     // Position must be finite and between zero and duration.
     if (
         !Number.isFinite(elapsed)
     ) {
-
         return;
-
     }
 
     const position =
@@ -509,15 +491,12 @@ function updateMediaPosition() {
             "Media Session position update skipped:",
             error
         );
-
     }
-
 }
 
 // Builds the Centrifugo subscription list AzuraCast expects: one
 // "station:<shortcode>" channel per station, all on a single connection.
 function buildNowPlayingSubs() {
-
     const subs = {};
 
     stations.forEach(station => {
@@ -533,7 +512,6 @@ function buildNowPlayingSubs() {
 // message the instant a station's now-playing data actually changes,
 // instead of us having to wait out a polling interval to notice.
 function connectNowPlayingFeed() {
-
     const sseBaseUri =
         new URL(
             "/api/live/nowplaying/sse",
@@ -569,7 +547,6 @@ function connectNowPlayingFeed() {
                     // Current Centrifugo shape: each subscribed channel's
                     // cached last message is delivered up front on connect.
                     for (const subName in connectData.subs) {
-
                         const sub =
                             connectData.subs[subName];
 
@@ -692,7 +669,6 @@ function togglePlayback(index) {
                 index;
 
             anchorPlaybackClock(station);
-
             renderDashboard();
         })
         .catch(error=>{
@@ -713,7 +689,6 @@ function togglePlayback(index) {
 // back to the server-only calculation whenever the event fired before
 // activeStation was assigned, which looked identical to the original bug.
 function anchorPlaybackClock(station) {
-
     station.playStartedAt =
         Date.now();
 
@@ -721,15 +696,12 @@ function anchorPlaybackClock(station) {
         typeof station.serverElapsed === "number"
         ? station.serverElapsed
         : 0;
-
 }
 
 function updatePlayButtons() {
-
     document
         .querySelectorAll(".listen")
         .forEach((button,index)=>{
-
             button.textContent =
                 (
                     index === activeStation &&
@@ -738,15 +710,11 @@ function updatePlayButtons() {
                 )
 
                 ? "⏸ Pause"
-
                 : "▶ Play";
-
         });
-
 }
 
 function updateViewButtons() {
-
     const compactButton =
         document.getElementById("compactButton");
 
@@ -754,37 +722,26 @@ function updateViewButtons() {
         document.getElementById("fullButton");
 
     if (compactButton) {
-
         compactButton.classList.toggle(
             "active",
             !fullView
         );
-
     }
 
     if (fullButton) {
-
         fullButton.classList.toggle(
             "active",
             fullView
         );
-
     }
-
 }
 
 function renderHistory(station) {
-
     if (!fullView || !station.expanded) {
-
         return "";
-
     }
-
     return `
-
 <div class="history">
-
 <h3>History</h3>
 
 ${
@@ -816,13 +773,10 @@ function renderDashboard() {
         document.getElementById("dashboard");
 
     if (!dashboard) {
-
         console.error(
             "Dashboard element missing"
         );
-
         return;
-
     }
 
     dashboard.className =
@@ -865,12 +819,9 @@ function renderDashboard() {
         dashboard.innerHTML += `
 
 <section class="station ${playing}" data-station="${index}">
-
 <img class="art"
 src="${getArtwork(station)}">
-
 <div class="info">
-
 <div class="station-name">
 
 ${station.name}
@@ -878,37 +829,22 @@ ${station.name}
 <span class="live">
 ● LIVE
 </span>
-
 </div>
-
 <div class="song">
-
 ${song.title || "Unknown"}
-
 </div>
-
 <div class="artist">
-
 ${song.artist || ""}
-
 </div>
-
 <div class="time">
-
 ${formatTime(elapsed)}
 /
 ${formatTime(duration)}
-
 </div>
-
 <div class="progress">
-
 <span style="width:${progress}%"></span>
-
 </div>
-
 <div class="next">
-
 ${
 next
 ?
@@ -916,17 +852,12 @@ next
 :
 "Next: None"
 }
-
 </div>
-
 <button
 class="listen"
 onclick="togglePlayback(${index})">
-
 ▶ Play
-
 </button>
-
 ${
 fullView
 ?
@@ -934,11 +865,8 @@ fullView
 <button
 class="request-button"
 onclick="openRequestModal(${index})">
-
 🎵 Request
-
 </button>
-
 <button
 class="history-button"
 onclick="toggleHistory(${index})">
@@ -954,9 +882,7 @@ ${station.expanded ? "▲ Hide History" : "▼ History"}
 ${renderHistory(station)}
 
 </div>
-
 </section>
-
 `;
 
     });
@@ -968,16 +894,12 @@ ${renderHistory(station)}
 }
 
 function toggleHistory(index) {
-
     stations[index].expanded =
         !stations[index].expanded;
-
     renderDashboard();
-
 }
 
 async function openRequestModal(index) {
-
     const station =
         stations[index];
 
@@ -991,13 +913,11 @@ async function openRequestModal(index) {
         document.getElementById("requestList");
 
     if (!modal || !title || !list) {
-
         console.error(
             "Request modal elements missing"
         );
 
         return;
-
     }
 
     requestStation = station;
@@ -1018,19 +938,14 @@ async function openRequestModal(index) {
         );
 
     if (search) {
-
         search.value = "";
-
     }
 
     await loadRequests();
 
     if (!requestControlsInitialized) {
-
       setupRequestControls();
-
       requestControlsInitialized = true;
-
 }
 }
 
@@ -1047,23 +962,17 @@ function updateRequestPagination() {
         );
 
     if (info) {
-
         info.textContent =
             `of ${requestTotalPages}`;
-
     }
 
     if (jump) {
-
         jump.value =
             requestPage;
-
     }
-
 }
 
 function renderRequests(station, requests) {
-
     if (requests.rows) {
         requests = requests.rows;
     }
@@ -1080,7 +989,6 @@ function renderRequests(station, requests) {
     list.innerHTML = "";
 
     requests.forEach(request => {
-
         list.insertAdjacentHTML(
             "beforeend",
             `
@@ -1097,41 +1005,29 @@ src="${request.song.art || FALLBACK_ART}"
 <strong>
 ${request.song.title}
 </strong>
-
 <br>
-
 <span>
 ${request.song.artist}
 </span>
-
 <br>
-
 <small>
 ${request.song.album || ""}
 </small>
-
 </div>
-
 <button
 class="request-song-button"
 data-request="${request.request_id}"
 onclick="submitRequest('${request.request_url}', this)">
-
 Request
-
 </button>
-
 </div>
 
 `
         );
-
     });
-
 }
 
 function setupRequestControls() {
-
     const search =
         document.getElementById(
             "requestSearch"
@@ -1163,144 +1059,100 @@ function setupRequestControls() {
         );
 
     if (search) {
-
         let timer;
-
         search.addEventListener(
             "input",
             ()=>{
-
                 clearTimeout(timer);
-
                 timer =
                     setTimeout(
                         ()=>{
-
                             requestSearch =
                                 search.value;
-
                             requestPage =
                                 1;
-
                             loadRequests();
-
                         },
                         300
                     );
-
             }
         );
-
     }
 
     if (rows) {
-
         rows.addEventListener(
             "change",
             ()=>{
-
                 requestRows =
                     Number(rows.value);
-
                 requestPage =
                     1;
-
                 loadRequests();
-
             }
         );
-
     }
 
     if (refresh) {
-
         refresh.addEventListener(
             "click",
             loadRequests
         );
-
     }
 
     if (prev) {
-
         prev.addEventListener(
             "click",
             ()=>{
-
                 if (requestPage > 1) {
-
                     requestPage--;
-
                     loadRequests();
-
                 }
-
             }
         );
-
     }
 
     if (next) {
-
         next.addEventListener(
             "click",
             ()=>{
-
                 if (
                     requestPage <
                     requestTotalPages
                 ) {
-
                     requestPage++;
-
                     loadRequests();
-
                 }
-
             }
         );
-
     }
 
     if (jump) {
-
         jump.addEventListener(
             "change",
             ()=>{
-
                 let page =
                     Number(jump.value);
-
                 if (page < 1) {
-
                     page = 1;
-
                 }
 
                 if (
                     page >
                     requestTotalPages
                 ) {
-
                     page =
                         requestTotalPages;
-
                 }
 
                 requestPage =
                     page;
-
                 loadRequests();
-
             }
         );
-
     }
-
 }
 
 function showToast(message) {
-
     const toast =
         document.getElementById("toast");
 
@@ -1321,26 +1173,19 @@ function showToast(message) {
             toast.classList.remove(
                 "show"
             );
-
         },
         3000
     );
-
 }
 
 async function submitRequest(requestUrl, button) {
-
     if (button) {
-
         button.disabled = true;
-
         button.textContent =
             "Requesting...";
-
     }
 
     try {
-
         const response =
             await fetch(
                 `${REQUEST_API_BASE.replace("/requests","")}${requestUrl}`,
@@ -1350,31 +1195,24 @@ async function submitRequest(requestUrl, button) {
             );
 
         if (!response.ok) {
-
             throw new Error(
                 `HTTP ${response.status}`
             );
-
         }
 
         if (button) {
-
             button.textContent =
                 "Requested ✓";
-
             button.classList.add(
                 "requested"
             );
-
         }
 
         showToast(
             "Your song request has been submitted."
         );
-
     }
     catch(error) {
-
         console.error(
             "Request submit failed:",
             error
@@ -1388,49 +1226,38 @@ async function submitRequest(requestUrl, button) {
          */
 
         if (button) {
-
             button.textContent =
                 "Requested ✓";
-
             button.classList.add(
                 "requested"
             );
-
         }
 
         showToast(
             "Your song request has been submitted."
         );
-
     }
-
 }
 
 function closeRequestModal() {
-
     const modal =
         document.getElementById("requestModal");
 
     if (modal) {
-
         modal.classList.add(
             "hidden"
         );
-
     }
-
 }
 
 const closeRequestButton =
     document.getElementById("closeRequestModal");
 
 if (closeRequestButton) {
-
     closeRequestButton.addEventListener(
         "click",
         closeRequestModal
     );
-
 }
 
 async function initializeDashboard() {
